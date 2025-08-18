@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+</head>
+
+<body>
+  <!-- Navbar (hidden initially) -->
+  <nav id="navbar" class="navbar hidden">
+    <img src="{{ url_for('static', filename='law_logo.png') }}" alt="Logo" class="navbar-logo" onclick="resetApp()">
+    <span class="navbar-title" onclick="resetApp()">Avocado-Large</span>
+  </nav>
+
+  <!-- Landing Page -->
+  <div class="container">
+    <div id="header">
+      <img id="logo" src="{{ url_for('static', filename='law_logo.png') }}">
+      <h1 id="title">Avocado</h1>
+      <p id="tagline"><em>Hi! I'm your Legal Assistant for Indian Law.</em></p>
+      <div class="switch-container">
+        <span class="mode-label">📚ChromaDB</span>
+        <label class="switch" title="">
+          <input type="checkbox" id="mode-toggle">
+          <span class="slider round"></span>
+          <span class="tooltip-text" id="toggle-tooltip">
+            📚 Avocado-Large: Queries more data<br>
+            🌰 Avocado-Small: Queries less data
+          </span>
+        </label>
+        <span class="mode-label">Pinecone🌰</span>
+      </div>
+    </div>
+        
+
+    <!-- Chat Section -->
+    <div class="chat-wrapper">
+      <div class="chat-box" id="chatBox">
+        <!-- Past chat history dynamically added here -->
+        <div id="response-section" style="display: none;">
+          <div class="query-box">
+            <h3>Question</h3>
+            <p id="user-question"></p>
+          </div>
+          <div class="answer-box">
+            <h3>Answer</h3>
+            <p id="answer"></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Input Section -->
+      <div class="input-container">
+        <textarea id="question" placeholder="Ask your legal question..."></textarea>
+        <button onclick="submitQuery()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 -960 960 960" fill="#568203">
+            <path d="M440-240v-368L296-464l-56-56 240-240 240 240-56 56-144-144v368h-80Z" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS -->
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
