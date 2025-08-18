@@ -1,0 +1,41 @@
+ # Build local image from Dockerfile
+
+services:
+  flask-app:
+    build: .                       
+    container_name: legal-rag-app
+    image: myapp:prod
+    expose:
+      - "5000"
+    env_file:
+      - .env
+    environment:
+      - FLASK_SECRET_KEY=${FLASK_SECRET_KEY:-defaultsecret}
+      - GITHUB_TOKEN=${GITHUB_TOKEN}
+      - PINECONE_API_KEY=${PINECONE_API_KEY}
+    restart: unless-stopped
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - /etc/letsencrypt:/etc/letsencrypt   # SSL certificates
+      - ./certbot/www:/var/www/certbot       # shared webroot for Certbot
+    depends_on:
+      - flask-app
+    restart: unless-stopped
+
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    volumes:
+      - /etc/letsencrypt:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    entrypoint: >
+      sh -c "certbot certonly --webroot --webroot-path=/var/www/certbot
+      --email anikasrivastava151@gmail.com --agree-tos --no-eff-email
+      -d avocado-ai.duckdns.org"

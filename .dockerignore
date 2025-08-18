@@ -1,0 +1,33 @@
+# Environment & secrets
+.env
+*.env
+
+# Python cache
+**__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Logs & temp files
+*.log
+*.tmp
+*.sqlite
+*.db
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Local datasets / embeddings
+**/chroma_legal_database/
+*.npy
+*.pt
+
+# Git
+.git
+.gitignore

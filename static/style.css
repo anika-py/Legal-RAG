@@ -1,0 +1,301 @@
+body {
+  font-family: sans-serif;
+  background: #f8f9f6; 
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  color: #10120c; 
+}
+
+.container {
+  margin-top: 2rem;
+  padding: 2rem;
+  transition: all 0.5s ease-in-out;
+  position: relative;
+}
+
+#logo {
+  width: 150px;
+  transition: all 0.5s ease-in-out;
+}
+
+#title {
+  font-size: 80px;
+  font-family: serif;
+  margin-top: -1rem;
+  color: #568203; 
+  background-image: linear-gradient(90deg, #568203 32%, #54413b 74%); 
+  background-clip: text; 
+  -webkit-background-clip: text; 
+  -webkit-text-fill-color: transparent; 
+}
+
+#tagline {
+  font-size: 20px;
+  margin-top: -3.5rem;
+  color: #54413b; 
+  font-style: italic;
+}
+
+.input-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  gap: 1rem;
+  bottom: 0;
+  width: 100%;
+  position: fixed;
+  background: transparent;
+}
+
+textarea {
+  width: 60%;
+  height: 80px;
+  background-color: #c4d2aa; 
+  border: 2px solid #568203; 
+  padding: 1rem;
+  border-radius: 20px;
+  font-size: 1rem;
+  resize: none;
+  color: #10120c;
+}
+
+textarea::placeholder {
+  color: #54413b; 
+  opacity: 1;
+}
+
+button {
+  background-color: #c4d2aa; 
+  border: 2px solid #568203 !important;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #f8f9f6; 
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #a9b88c;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: #f8f9f6;
+  color: white;
+  padding: 0.5rem 1rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  transition: top 0.3s ease-in-out;
+}
+
+.navbar-logo {
+  width: 40px;
+  height: auto;
+  transition: all 0.5s ease-in-out;
+  cursor: pointer;
+}
+
+.navbar-title {
+  font-size: 1.2rem;
+  font-family: serif;
+  margin: 0.5rem 0;
+  color: #568203; 
+  background-image: linear-gradient(90deg, #568203 32%, #54413b 74%); 
+  background-clip: text; 
+  -webkit-background-clip: text; 
+  -webkit-text-fill-color: transparent; 
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+.chat-box {
+  padding-bottom: 200px;
+}
+
+.chat-entry {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0 1rem;
+}
+
+/* User question aligned right */
+.question-box {
+  display: flex;
+  justify-content: flex-end; /* pushes everything to the right */
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.answer-box {
+  display: flex;
+  justify-content: flex-start; /* pushes everything to the left */
+  align-items: center;
+  gap: 0.5rem;
+}
+
+
+.avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+}
+
+.bubble {
+  max-width: 60%;
+  padding: 0.75rem 1rem;
+  border-radius: 18px;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+/* User bubble */
+.question-box .bubble {
+  background-color: #c4d2aa;
+  border: 2px solid #568203;
+  border-radius: 20px 20px 0 20px;
+  color: #10120c;
+  text-align: left;
+}
+
+/* Bot bubble */
+.answer-box .bubble {
+  background-color: #f0f0f0;
+  border: 2px solid #54413b;
+  border-radius: 20px 20px 20px 0;
+  color: #10120c;
+  text-align: left;
+}
+
+
+.minimized-logo {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 50px !important;
+}
+
+/* The switch - the box around the slider */
+.switch-container {
+  position: relative;
+  display: inline-block;
+}
+
+.mode-label {
+  color: #333;
+  font-family: Arial, sans-serif;
+}
+
+.tooltip-text {
+  visibility: hidden;
+  width: 220px;
+  background-color: #333;
+  color: #fff;
+  text-align: left;
+  border-radius: 6px;
+  padding: 8px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%; /* Position above the switch */
+  left: 50%;
+  margin-left: -110px; /* Center horizontally */
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.tooltip-text::after {
+  content: "";
+  position: absolute;
+  top: 100%; /* Arrow below tooltip */
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #333 transparent transparent transparent;
+}
+
+.switch-container:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 29px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #b4e852;
+  border: 2px solid #7aa921;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 14px;
+  width: 14px;
+  left: 4px;
+  bottom: 4px;
+  background-color: #714335;
+  border: 2px solid #f5d264;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #5d641d;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #5d641d;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(22px);
+  -ms-transform: translateX(22px);
+  transform: translateX(22px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
