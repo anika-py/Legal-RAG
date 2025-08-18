@@ -13,7 +13,7 @@ Built with Flask, ChromaDB, Pinecone and Mistral, this project demonstrates my e
 ## ✨ Features
 * Vector Search with ChromaDB – Efficient retrieval of relevant judgments.
 * Mistral AI Integration – Generates clear, context-aware summaries and answers.
-* Session Memory – Chat remembers your previous questions for coherent conversations if you refresh the page. Clicking the title or logo starts a new chat.
+* Session Memory – Chat remembers your previous questions  if you refresh the page for coherent conversations. Clicking the title or logo starts a new chat.
 * Deployed on Cloud with Docker – Accessible through a secure endpoint served via Flask + Nginx + Certbot
 * Interactive Chat UI – User-friendly interface with styled Q&A boxes.
 * Accessible through a live demo link  
