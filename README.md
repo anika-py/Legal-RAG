@@ -27,14 +27,15 @@ Built with Flask, ChromaDB, Pinecone and Mistral, this project demonstrates my e
 - **Deployment:** Docker, AWS EC2, Nginx, Certbot  
 
 ---
-
 ## 📂 Project Structure
-│── app.py                # Flask backend
-│── avocado-large
-    │── query_engine.py      # ChromaDB + Mistral AI RAG-pipeline
-│── avocado-small
-    │── query_engine.py      # Pinecone + Mistral AI RAG-pipeline
-│── templates/            # HTML templates
-│── static/               # CSS + JS
-│── requirements.txt      # Dependencies
-│── docker-compose.yml    # Deployment setup
+```
+├── app.py                  # Flask backend
+├── avocado-large/
+│   └── query_engine.py     # ChromaDB + Mistral AI RAG-pipeline
+├── avocado-small/
+│   └── query_engine.py     # Pinecone + Mistral AI RAG-pipeline
+├── templates/              # HTML templates
+├── static/                 # CSS + JS
+├── requirements.txt        # Dependencies
+└── docker-compose.yml      # Deployment setup
+```
