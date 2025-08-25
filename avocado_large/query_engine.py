@@ -30,7 +30,22 @@ model = SentenceTransformer("all-MiniLM-L6-v2")
 
 chat_history = []
 
-def retrieve_context(query, k=5):
+def extract_legal_keywords(query):
+    """
+    Extract simple legal keywords from the query, e.g., Article numbers, Sections, or statutes.
+    You can improve this with regex or NLP for more complex cases.
+    """
+    keywords = []
+    # Example: extract "Article 15" → "Article 15"
+    import re
+    matches = re.findall(r'(Article|Section)\s*\d+', query, re.IGNORECASE)
+    keywords.extend(matches)
+    return keywords
+
+def retrieve_context(query, k=15):
+    """
+    Retrieve top-k chunks from ChromaDB with hybrid semantic + keyword filtering.
+    """
     query_emb = model.encode([query]).tolist()
     results = collection.query(query_embeddings=query_emb, n_results=k)
 
@@ -40,8 +55,30 @@ def retrieve_context(query, k=5):
     if not chunks or not any(chunks):
         return "No relevant context could be retrieved."
 
+    # Extract keywords from the query (e.g., Article numbers)
+    query_keywords = extract_legal_keywords(query)
+
+    # Keyword filtering
+    def keyword_filter(chunks, metadatas, keywords):
+        if not keywords:
+            return chunks, metadatas  # nothing to filter
+        filtered_chunks = []
+        filtered_metas = []
+        for chunk, meta in zip(chunks, metadatas):
+            text_to_search = " ".join([str(chunk)] + [str(v) for v in meta.values()]).lower()
+            if all(kw.lower() in text_to_search for kw in keywords):
+                filtered_chunks.append(chunk)
+                filtered_metas.append(meta)
+        return filtered_chunks, filtered_metas
+
+    kw_chunks, kw_metas = keyword_filter(chunks, metadatas, query_keywords)
+
+    # Fallback to semantic results if keyword filter returns nothing
+    final_chunks, final_metas = (kw_chunks, kw_metas) if kw_chunks else (chunks, metadatas)
+
+    # Build context string
     context_parts = []
-    for chunk, meta in zip(chunks, metadatas):
+    for chunk, meta in zip(final_chunks, final_metas):
         bench = meta.get("bench", "N/A")
         case_title = meta.get("case_title", "Unknown Case")
         date = meta.get("date_of_judgment", "Unknown Date")
@@ -62,7 +99,12 @@ def query_mistral(context, question, chat_history):
 
     system_message = {
         "role": "system",
-        "content": """You are a legal assistant trained exclusively on Indian Supreme Court judgments between 1950 and 2025.
+    "content": """You are a legal assistant trained exclusively on Indian Supreme Court judgments between 1950 and 2025.
+
+Important instructions:
+- If the user asks for the **meaning, definition, or explanation** of a constitutional article, statute, or legal term, provide a concise and clear **definition first**.
+- Only include case examples if the user explicitly asks for them.
+- Otherwise, answer based on the retrieved context.
 
 Your task is to:
 - Select the **most relevant case** from the provided context.
@@ -86,7 +128,7 @@ Avoid:
 - Guessing or filling in information not present in the context.
 
 If you find no relevant ruling, say:
-\"I couldn't find relevant information in the provided context.\"
+"I couldn't find relevant information in the provided context."
 
 When nothing specific is asked, include:
 - **Case Title**
