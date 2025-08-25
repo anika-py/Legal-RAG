@@ -38,4 +38,10 @@ Built with Flask, ChromaDB, Pinecone and Mistral, this project demonstrates my e
 ├── static/                 # CSS + JS
 ├── requirements.txt        # Dependencies
 └── docker-compose.yml      # Deployment setup
+└── Preprocessing/
+    └── (1)preprocessing_and_validation.ipynb # Parsing and cleaning the PDFs/json files of the Judgements. Creating a json file with 2.1M+ text chunks
+    └── (2)embedding_colab.ipynb              # Vector embedding the text on Google Colab (Free Ver.) using the T4 GPU. Storing the embeddings into 4 files of 5 gbs
+    └── (3)embedding_validation.ipynb         # Ensuring all chunks were embedded
+    └── (4)chromadb_databasing.py             # Storing the vector embeddings on a persistent ChromaDB client - created a 20GB database
+    └── (5)pinecone_databasing.ipynb          # Storing the vector embeddings on Pinecone (Free Ver.) through Google Colab
 ```
