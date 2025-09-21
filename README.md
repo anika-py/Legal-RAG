@@ -1,9 +1,5 @@
 # Avocado AI – Legal Judgment Search Engine
 
-**Live Demo:** [[https://avocado-ai.duckdns.org/](https://avocado-ai.duckdns.org/)]
-
----
-
 ## Overview
 Avocado AI is an AI-powered Retrieval-Augmented Generation (RAG) system designed to search through [Supreme Court of India judgments (1950–2025)](https://www.kaggle.com/datasets/adarshsingh0903/legal-dataset-sc-judgments-india-19502024) and provide context-aware answers. It allows users to query legal cases in natural language and get context-aware answers with references to judgments.  
 Built with Flask, ChromaDB, Pinecone and Mistral, this project demonstrates my expertise in **Natural Language Processing (NLP), Large Language Models (LLMs), and Full-Stack Deployment**.
@@ -17,6 +13,12 @@ Built with Flask, ChromaDB, Pinecone and Mistral, this project demonstrates my e
 * Deployed on Cloud with Docker – Accessible through a secure endpoint served via Flask + Nginx + Certbot
 * Interactive Chat UI – User-friendly interface with styled Q&A boxes.
 * Accessible through a live demo link  
+
+---
+
+**Live Demo:** 
+
+https://github.com/user-attachments/assets/8807d7f2-93d3-443e-861b-9558fdd9cca4
 
 ---
 
